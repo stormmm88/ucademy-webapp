@@ -1,0 +1,10 @@
+
+export {default as IconPlay} from "./IconPlay"
+export {default as AcademicCap} from "./AcademicCap"
+export {default as IconStudy} from "./IconStudy"
+export {default as IconUsers} from "./IconUsers"
+export {default as IconStack} from "./IconStack"
+export {default as IconCmt} from "./IconCmt"   
+export {default as IconStar} from "./IconStar" 
+export {default as IconEye} from "./IconEye"
+export {default as IconClock} from "./IconClock"

@@ -1,26 +1,22 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+    --color-primary: #4347b5;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+    body {
+        @apply bg-gray-100;
+    }
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+    .svg-animate{
+        stroke-dashoffset: 100;
+        stroke-dasharray: 100;
+        animation: dash 1.5s linear forwards;
+    }
+    @keyframes dash{
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
 }
