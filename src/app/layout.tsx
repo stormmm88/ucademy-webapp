@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { manrope } from "@/utils";
-
-import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
+import ClerkContext from "@/components/common/ClerkContext";
 
 export const metadata: Metadata = {
   title: "Ucademy",
@@ -16,13 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      signInUrl="/sign-in"
-      signUpUrl="/sign-up"
-      signInFallbackRedirectUrl="/"
-      signUpFallbackRedirectUrl="/"    
-    >
-      <html lang="en">
+    <ClerkContext>
+      <html lang="en" suppressHydrationWarning>
         <body className={manrope.className}>
           <ThemeProvider
             attribute="class"
@@ -34,7 +28,7 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
+    </ClerkContext>
 
   );
 }
