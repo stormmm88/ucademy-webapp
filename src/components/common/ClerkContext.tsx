@@ -1,10 +1,17 @@
-'use client';   
+"use client";   
 
 import { ClerkProvider } from "@clerk/nextjs";
 import React from "react";
 
 const ClerkContext = ( { children }: { children: React.ReactNode}) => {
-    return <ClerkProvider>{children}</ClerkProvider>
+    return <ClerkProvider
+                signInUrl="/sign-in"
+                signUpUrl="/sign-up"
+                signInFallbackRedirectUrl="/"
+                signUpFallbackRedirectUrl="/"
+            >
+                {children}
+            </ClerkProvider>
 }
 
 export default ClerkContext
