@@ -7,9 +7,10 @@ import createUser from "@/lib/actions/user.actions";
 const page = async () => {
     const user = await createUser({
         clerkId: "clerk-123",
-        email_address: "vubaotest@gmail.com",
+        email: "vubaotest@gmail.com",
         username: "Vũ Bão"
     });
+    console.log(user)
     return (
         <div>
             <Heading>Khám phá</Heading>
