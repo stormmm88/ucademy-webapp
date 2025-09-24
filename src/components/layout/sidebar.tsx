@@ -4,12 +4,13 @@ import Link from "next/link";
 import { TMenuItem } from "@/types";
 import { ActiveLink } from "../common";
 import { UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "../common/ModeToggle";
 
 export default function Sidebar() {
   return (
-    <div className="p-5 border-r border-gray-200 dark:border-gray-800 h-screen bg-white">
+    <div className="p-5 border-r border-r-gray-200 dark:border-gray-800 dark:bg-grayDarker dark:border/10 h-screen bg-white flex flex-col">
         <Link href="/" className="font-bold text-3xl inline-block mb-5">
-            <span className="text-primary">U</span>
+            <span className="text-pri">U</span>
             cademy
         </Link>
         <ul className="flex flex-col gap-2">
@@ -17,8 +18,9 @@ export default function Sidebar() {
                 <MenuItem key={index} url={item.url} title={item.title} icon={item.icon}/>
             ))}
         </ul>
-        <div className="flex mt-5">
-            <UserButton />
+        <div className="mt-auto flex items-center justify-end gap-5">
+            <ModeToggle></ModeToggle>
+            <UserButton />  
         </div>
     </div>
   );

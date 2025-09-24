@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 const AdminLayout = async ({ children }: {children: React.ReactNode }) => {
     const { userId } = await auth();
-    if (!userId) return redirect("/sign-in")
+    if (!userId) return redirect("/sign-in");
     return (
         <div>{children}</div>
     )   

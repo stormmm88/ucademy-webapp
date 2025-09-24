@@ -19,7 +19,7 @@ const courseInfor = [
 
 const CourseItem = () => {
   return (
-    <div className="bg-white border border-gray-300 rounded-2xl p-4 relative">
+    <div className="bg-white dark:bg-grayDarker dark:border-white/10 border border-gray-300 rounded-2xl p-4 relative">
         <Link href="#" className="block h-[200px]">
             <Image
                 src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -36,7 +36,7 @@ const CourseItem = () => {
         </Link>
         <div className="pt-4">
             <h3 className="font-bold mb-5 text-xl">Khóa học NextJS - Xây dựng E-Learning hoàn chỉnh</h3>
-            <div className="flex items-center gap-3 mb-5 text-xs text-gray-500">
+            <div className="flex items-center gap-3 mb-5 text-xs text-gray-500 dark:grayDark">
                 {courseInfor.map((item, index) => (
                     <div key={index} className="flex items-center gap-1">
                         {item.icon("size-4")}
@@ -47,7 +47,7 @@ const CourseItem = () => {
             </div>
             <Link
                 href="#"
-                className="flex items-center justify-center w-full mt-10 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/80 transition"
+                className="flex items-center justify-center w-full mt-10 py-3 rounded-xl bg-pri text-white font-medium hover:bg-pri/80 transition"
             >
                 Xem chi tiết
             </Link>

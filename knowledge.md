@@ -137,3 +137,14 @@ images: {
     ],
   },
 ```
+
+# Mongoose
+-Schema trong Mongoose là một đối tượng xác định cấu trúc của tài liệu(document) trong một collection của MongDB.
+Nó cho phép định nghĩa các trường(fields), kiểu dữ liệu (data types) và các ràng buộc (contraints) cho dữ liệu.
+- Ví dụ: Collection `users` có `document` là
+```js
+{
+  id: "1",
+  name: "Bão",
+}
+```

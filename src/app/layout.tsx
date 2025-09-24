@@ -3,6 +3,7 @@ import "./globals.css";
 import { manrope } from "@/utils";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/common/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Ucademy",
@@ -23,7 +24,14 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={manrope.className}>
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -13,10 +13,10 @@ const ActiveLink = ({
     const isActive = url === pathname;
     return (
         <Link href={url} 
-        className={`p-3 rounded-md flex items-center gap-3 transition-all 
+        className={`p-3 rounded-md flex items-center gap-3 transition-all dark:text-grayDark 
             ${isActive 
-            ? "text-white bg-primary svg-animate" 
-            : "hover:text-primary hover:bg-primary/10"}`}
+            ? "!text-white bg-pri svg-animate" 
+            : "hover:!text-primary hover:!bg-pri/10"}`}
         >
             {children}
         </Link>
