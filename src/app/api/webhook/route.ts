@@ -1,6 +1,6 @@
 // //api/webhook
 
-import createUser from "@/lib/actions/user.actions";
+import { createUser } from "@/lib/actions/user.actions";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";

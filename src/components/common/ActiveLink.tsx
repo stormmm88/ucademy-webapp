@@ -15,8 +15,8 @@ const ActiveLink = ({
         <Link href={url} 
         className={`p-3 rounded-md flex items-center gap-3 transition-all dark:text-grayDark 
             ${isActive 
-            ? "!text-white bg-pri svg-animate" 
-            : "hover:!text-primary hover:!bg-pri/10"}`}
+            ? "!text-pri bg-pri/15 svg-animate" 
+            : "hover:!text-pri hover:!bg-pri/10"}`}
         >
             {children}
         </Link>

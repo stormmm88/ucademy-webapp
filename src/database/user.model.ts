@@ -39,7 +39,7 @@ const userSchema = new Schema<IUser>({
     courses: [
         {
             type: Schema.Types.ObjectId,
-            ref: "course" //liên kết tới model course
+            ref: "Course" //liên kết tới model course
         }
     ],
     created_at: {
@@ -62,6 +62,6 @@ const User = models.User || model("User", userSchema);
 //mục đích: khai báo model trong mongoose. models là 1 đối tượng trong mongoose, nó chứa tất cả những model đã đăng kí trước đó
 // nếu mà cái models đăng kí đã có User thì dùng (trong trường hợp là chưa khai báo sẽ trả về undefined)
 // sau đó nó chạy sang model, model này truyền vào 2 cái là tên model(User), cái thứ là schema => chúng ta đăng kí 1 model có tên
-// là "User" và sử dung schema là "userchema"
+// là "User" và sử dung schema là "userSchema"
 export default User;
 

@@ -1,4 +1,7 @@
 @import "tailwindcss";
+
+@import "uploadthing/tw/v4";
+@source "../node_modules/@uploadthing/react/dist";
 /* @plugin "tailwindcss-animate";
 @import "tw-animate-css"; */
 
@@ -14,6 +17,12 @@
     body {
         @apply bg-gray-100 dark:bg-grayDarkest;
     }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+}
 }
 @layer components {
     .svg-animate{
@@ -26,6 +35,21 @@
             stroke-dashoffset: 0;
         }
     }
+}
+
+@layer utilities{
+    /* .bgDarkMode {
+        @apply bg-white dark:bg-grayDarker;
+    }
+    .borderDarkMode{
+        @apply border-gray-200 dark:border/10;
+    } */
+    /* .focus-pri:focus{
+        @apply focus:ring-4 focus:ring-pri focus:ring-pri/10;
+    } */
+    /* .skeleton{
+        @apply bg-gray-200 dark:grayDarker animate-pulse;
+    } */
 }
 
 @theme inline {
@@ -143,3 +167,90 @@
     @apply bg-background text-foreground;
     }
 } */
+
+
+@media screen and (max-width: 1022.98px) { 
+    .course-slider {
+        display: grid;
+        justify-content: flex-start;
+        grid-auto-columns: 300px;
+        grid-auto-flow: row;
+        grid-gap: 1.5rem;
+        overflow: visible;
+        scroll-snap-type: mandatory;
+        scroll-snap-stop: always;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        -webkit-overflow-scrolling: touch;
+        scroll-padding: 1rem;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .course-slider::-webkit-scrollbar {
+        display: none;
+        width: 0;
+    }
+    .course-slider > * {
+        scroll-snap-align: start;
+    }
+}
+
+/* entry-content */
+
+.entry-content{
+    font-size: 16px;
+    line-height: 2;
+    p,h1,h2,h3,h4,h5,h6,ul,ol,figure {
+        @apply mb-5;
+    }  
+    ol {
+        list-style-type: decimal;
+    }
+    ul{
+        list-style-type: disc;
+    }
+    ul ol {
+        @apply pl-10;
+    }
+    a{
+        @apply text-blue-600 underline;
+    }
+}
+
+.swal2-container {
+    .swal2-title {
+        @apply font-bold text-xl
+    }
+
+    .swal2-actions{
+        .swal2-confirm{
+            @apply bg-pri
+        }
+
+        .swal2-confirm, .swal2-cancel{
+            @apply w-[150px]
+        }
+    }
+}
+
+.button-primary {
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;           /* Bỏ left: auto */
+        height: 100%;
+        width: 0;
+        background-color: rgba(255, 255, 255, 0.1);  /* Sửa white */
+        transition: all 0.35s linear;
+        z-index: -1;
+    }
+    &:hover::before {
+        left: 0;
+        right: auto;        /* Thêm right: auto để tránh xung đột */
+        width: 100%;
+    }
+}
+
