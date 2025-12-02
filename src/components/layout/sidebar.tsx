@@ -14,8 +14,8 @@ export default function Sidebar() {
   return (
     <div className="p-5 border-r border-r-gray-200 dark:border-gray-800 dark:bg-grayDarker dark:border/10 bg-white lg:flex flex-col inset-y-0 left-0 hidden w-[300px] fixed top-0 left-0 bottom-0">
         <Link href="/" className="font-bold text-3xl inline-block mb-5">
-            <span className="text-pri">U</span>
-            cademy
+            <span className="text-pri">VIED</span>
+            LAB
         </Link>
         <ul className="flex flex-col gap-2">
             {menuItem.map((item, index) => (

@@ -22,6 +22,19 @@ export type TCreateUserParams ={
     avatar?: string;
 }
 
+export type TGetAllUserParams = {
+    page?: number;
+    limit?: number;
+    search?: string;
+    status?: string;
+}
+
+export type TUpdateUserParams = {
+    userId: string;
+    updateData: Partial<IUser>;
+    path?: string;
+}
+
 //Course
 export type TCreateCourseParams = {
     title: string;

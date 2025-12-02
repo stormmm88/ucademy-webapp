@@ -27,8 +27,11 @@ import { cn } from "@/lib/utils";
 import { EOrderStatus } from "@/types/enums";
 import useQueryString from "@/hooks/useQueryString";
 import { debounce } from "lodash";
+import { updateOrder } from "@/lib/actions/order.actions";
+import { toast } from "react-toastify";
 
 interface IOrderManageProps {
+    _id: string;
     code: string;
     course: {
         title: string,
@@ -44,23 +47,31 @@ interface IOrderManageProps {
 
 const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
 
-    const handleCancelOrder = () => {
-        Swal.fire({
-            title: "Bạn có chắc chắn huy đơn hàng không",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Đồng ý",
-            cancelButtonText: "Thoát",
-        }).then( async (result) => {
-            if (result.isConfirmed) {
-                
+    const handleUpdateOrder = async ({orderId, status}: {orderId:string, status: EOrderStatus}) => {
+        if(status === EOrderStatus.CANCELED){
+            Swal.fire({
+                title: "Bạn có chắc chắn huy đơn hàng không",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Thoát",
+            }).then( async (result) => {
+                if (result.isConfirmed) {
+                    await updateOrder({ orderId, status})
+                }
+            });
+        }
+        if(status === EOrderStatus.COMPLETED){
+            const res = await updateOrder({ orderId, status})
+            if(res?.success){
+                toast.success("Cập nhật đơn hàng thành không")
             }
-        });
+        }
     };
 
-    const handleCompleteOrder = () => {
+    // const handleCompleteOrder = () => {
         
-    }
+    // }
 
     const {createQueryString, router, pathname } = useQueryString();
 
@@ -91,7 +102,7 @@ const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
                 <div className="flex gap-3">
                     <div className="w-full md:w-[300px]">
                         <Input 
-                            placeholder="Tìm kiếm khóa học ..." 
+                            placeholder="Tìm kiếm mã đơn hàng ..." 
                             className="border-pri/50"
                             onChange={(e) => handleSearchOrder(e)}
                         />
@@ -134,7 +145,7 @@ const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
                             <TableCell>
                                 <div className="flex flex-col gap-2">
                                     {(order.amount).toLocaleString("vi-VN")}₫
-                                    {order.discount > 0 && <span>(order.discount)</span>}
+                                    {order.discount > 0 && <span>{order.discount}</span>}
                                     <strong
                                         className={cn(orderStatus.find((item) => item.value === order.status)?.className, "bg-transparent")}
                                     >{(order.total).toLocaleString("vi-VN")}₫</strong>
@@ -152,24 +163,28 @@ const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
                                 </span>
                             </TableCell>
                             <TableCell>
-                                <div className="flex gap-2">
-                                    <button
-                                        type="button"
-                                        className= {commonClassNames.action}
-                                        onClick={handleCompleteOrder}    
-                                    >
-                                        <IconCheck className="size-4"/>
-                                        
-                                    </button>
-    
-                                    <button 
-                                        type="button"
-                                        className={commonClassNames.action}
-                                        onClick={handleCancelOrder}
-                                    >
-                                        <IconX className="size-4"/>
-                                    </button>
-                                </div>
+                                {order.status !== EOrderStatus.CANCELED && (    
+                                    <div className="flex gap-2">
+                                        {order.status !== EOrderStatus.COMPLETED && (
+                                            <button
+                                                type="button"
+                                                className= {commonClassNames.action}
+                                                onClick={() => handleUpdateOrder({orderId: order._id, status: EOrderStatus.COMPLETED})}    
+                                            >
+                                                <IconCheck className="size-4"/>
+                                                
+                                            </button>
+                                        )}
+        
+                                        <button 
+                                            type="button"
+                                            className={commonClassNames.action}
+                                            onClick={() => handleUpdateOrder({orderId: order._id, status: EOrderStatus.CANCELED})}
+                                        >
+                                            <IconX className="size-4"/>
+                                        </button>
+                                    </div>
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}

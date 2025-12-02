@@ -86,7 +86,7 @@ const CourseManage = ({ courses}: {courses: ICourse[]}) => {
                         path: '/manage/courses'
                     });
                     toast.success('Cập nhật trạng thái thành công!!')
-                    router.push(`${pathname}?${createQueryString('status', "")}?${createQueryString('search', "")}`)
+                    router.push(`${pathname}`)
 
                 }
             });

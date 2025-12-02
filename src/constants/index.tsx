@@ -21,7 +21,7 @@ export const menuItem: TMenuItem[] = [
     },
     {
         url: "/manage/members", 
-        title: "Quan lý học viên", 
+        title: "Quản lý học viên", 
         icon: <IconUsers className="size-5"/>    
     },
     {
@@ -75,7 +75,7 @@ export const orderStatus: {
         className: "text-orange-500"
     },
     {
-        title: "Từ chối",
+        title: "Đã hủy",
         value: EOrderStatus.CANCELED,
         className: "text-red-500"
     }
