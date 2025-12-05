@@ -14,17 +14,30 @@ import LessonContent from "@/components/lesson/LessonContent";
 import ButtonEnroll from "./ButtonEnroll";
 import { auth } from "@clerk/nextjs/server";
 import { getUserInfo } from "@/lib/actions/user.actions";
-// import { ILectrue } from "@/database/lecture.model";
+import CourseRatingSection from "./CourseRatingSection";
+import { getCourseComments } from "@/lib/actions/comment.actions";
 
 const page = async ( { params }: { params: { slug: string }}) => {
     const { slug } = await params;
     const course = await getCourseBySlug({ slug});
     if(!course) return <div>Khóa học không tồn tại</div>;
+    
     const { userId} = await auth();
     const findUser = await getUserInfo({ userId: userId || ''})
+    
     if(course.status !== ECourseStatus.APPROVED) return <PageNotFound />
+    
     const videoId =  course.intro_url?.split("v=")[1];
     const lectures = course.lectures || [];
+    
+    // Lấy comments của khóa học
+    const comments = await getCourseComments(course._id);
+    
+    // Kiểm tra user đã mua khóa học chưa
+    const userHasCourse = findUser?.courses?.some(
+        (c: { toString: () => string }) => c.toString() === course._id.toString()
+    ) || false;
+
     return (
         <>  
             <div className="grid lg:grid-cols-[2fr_1fr] gap-15">
@@ -91,6 +104,13 @@ const page = async ( { params }: { params: { slug: string }}) => {
                             ))}
                         </div>
                     </BoxSection>
+
+                    {/* Phần đánh giá */}
+                    <CourseRatingSection 
+                        courseId={(course._id).toString()}
+                        comments={comments ? JSON.parse(JSON.stringify(comments)) : []}
+                        userHasCourse={userHasCourse}
+                    />
                     
                 </div>
                 <div>
@@ -121,11 +141,17 @@ const page = async ( { params }: { params: { slug: string }}) => {
                                 <span>Tài liệu kèm theo</span>
                             </li>
                         </ul>
-                        <ButtonEnroll 
-                            user={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
-                            courseId= {course ? JSON.parse(JSON.stringify(course._id)) : null}
-                            amount={course.price}    
-                        />
+                        {userHasCourse ? (
+                            <div className="bg-green-100 text-green-700 rounded-lg p-3 text-center font-semibold">
+                                Bạn đã sở hữu khóa học này
+                            </div>
+                        ) : (
+                            <ButtonEnroll 
+                                user={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
+                                courseId= {course ? JSON.parse(JSON.stringify(course._id)) : null}
+                                amount={course.price}    
+                            />
+                        )}
                     </div>
                 </div>
             </div>

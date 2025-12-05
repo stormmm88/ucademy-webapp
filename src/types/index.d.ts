@@ -124,3 +124,29 @@ export type TCreateOrderParams = {
     discount?: number;
     coupon?: string;
 }
+
+//Comment
+export type TCreateCommentParams = {
+    course: string;
+    content: string;
+    rating: number;
+    path?: string;
+}
+
+export type TGetAllCommentsParams = {
+    page?: number;
+    limit?: number;
+    search?: string;
+    status?: string;
+    course?: string;
+}
+
+export type TUpdateCommentParams = {
+    commentId: string;
+    updateData: {
+        content?: string;
+        rating?: number;
+        status?: "APPROVED" | "PENDING" | "REJECTED";
+    };
+    path?: string;
+}
