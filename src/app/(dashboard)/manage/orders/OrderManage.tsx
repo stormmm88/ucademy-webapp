@@ -50,7 +50,7 @@ const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
     const handleUpdateOrder = async ({orderId, status}: {orderId:string, status: EOrderStatus}) => {
         if(status === EOrderStatus.CANCELED){
             Swal.fire({
-                title: "Bạn có chắc chắn huy đơn hàng không",
+                title: "Bạn có chắc chắn hủy đơn hàng không",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Đồng ý",

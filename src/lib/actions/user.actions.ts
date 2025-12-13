@@ -25,7 +25,7 @@ export async function getUserInfo({ userId }: { userId: string }): Promise<IUser
         connectToDatabase(); //userId chính là clerkId vì chúng ta lấy auth() từ clerk nên nó sẽ lấy id của clerk
         const findUser  = await User.findOne({ clerkId: userId });
         if(!findUser) return null;
-        return findUser;
+        return JSON.parse(JSON.stringify(findUser));
         
     } catch (error) {
        console.log(error) 

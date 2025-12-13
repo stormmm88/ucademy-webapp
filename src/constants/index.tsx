@@ -3,7 +3,7 @@ import { TMenuItem } from "@/types"
 import { IconPlay, AcademicCap, IconStudy, IconUsers, IconStack, IconCmt } from "../components/Icons"
 import { ECourseLevel, ECourseStatus, EOrderStatus } from "@/types/enums"
 
-export const menuItem: TMenuItem[] = [
+export const menuItem: (TMenuItem & { adminOnly?: boolean })[] = [
     {
         url: "/", 
         title: "Khám phá", 
