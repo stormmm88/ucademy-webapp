@@ -1,4 +1,5 @@
 import { ICourse } from "@/database/course.model";
+import { ICategory } from "@/database/category.model";
 import { ILesson } from "@/database/lesson.model";
 
 export type TActiveLinkProps = {
@@ -36,10 +37,29 @@ export type TUpdateUserParams = {
     path?: string;
 }
 
+//Category
+export type TCreateCategoryParams = {
+    name: string;
+    slug?: string;
+}
+
+export type TUpdateCategoryParams = {
+    categoryId: string;
+    updateData: Partial<ICategory>;
+    path?: string;
+}
+
+export type TGetAllCategoryParams = {
+    page?: number;
+    limit?: number;
+    search?: string;
+}
+
 //Course
 export type TCreateCourseParams = {
     title: string;
     slug: string;
+    category?: string;
 }
 
 export type TUpdateCourseParams = {
@@ -63,6 +83,7 @@ export type TGetAllCourseParams = {
     limit?: number;
     search?: string;
     status?: string;
+    categorySlug?: string;
 }
 
 //Lecture 
@@ -102,6 +123,7 @@ export type TUpdateLessonParams = {
         video_url?: string;
         duration?: number;
         content?: string;
+        _destroy?: boolean;
     }
 }
 

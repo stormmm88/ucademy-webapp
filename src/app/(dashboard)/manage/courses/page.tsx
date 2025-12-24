@@ -6,7 +6,7 @@ const page = async ({ searchParams }: { searchParams: { page: number; search: st
     const params = await searchParams;
     const courses = await getAllCourses({
         page: params.page || 1,
-        limit: 10,
+        limit: 4,
         search: params.search,
         status: params.status,
     });

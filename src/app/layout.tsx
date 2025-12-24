@@ -6,7 +6,7 @@ import ClerkContext from "@/components/common/ClerkContext";
 import { ToastContainer} from 'react-toastify';
 
 export const metadata: Metadata = {
-  title: "Ucademy",
+  title: "VIEDLAB",
   description: "Nền tảng học lập trình trực tuyến",
 };
 

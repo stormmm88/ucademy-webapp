@@ -92,6 +92,10 @@ export default function Sidebar() {
         return { ...item, adminOnly: true };
       }
 
+      if (item.url === "/manage/categories" || item.url === "/manage/categories") {
+        return { ...item, adminOnly: true };
+      }
+
       return { ...item, adminOnly: false };
     })
     .filter((item) => {

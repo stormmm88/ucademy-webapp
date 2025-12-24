@@ -20,6 +20,7 @@ const CourseItem = ({ data, cta, url = "" }: { data: ICourse, cta?: string, url?
     }
   ]
   const courseUrl = url ? url : `/course/${data.slug}`;
+  
   return (
     <div className="bg-white dark:bg-grayDarker dark:border-white/10 border border-gray-300 rounded-2xl p-4 relative flex flex-col">
         <Link href={courseUrl} className="block h-[200px]">
@@ -33,7 +34,7 @@ const CourseItem = ({ data, cta, url = "" }: { data: ICourse, cta?: string, url?
             />
             <span className="inline-block px-4 py-1 rounded-full absolute top-6 
                 right-6 z-10 bg-green-400 text-sm text-white font-medium">
-                    Mới
+                    Giảm {Math.round(100 - (Number(data?.sale_price) / Number(data?.price) * 100))}%
             </span>
         </Link>
         <div className="pt-4 flex flex-col flex-1">

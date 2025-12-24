@@ -16,6 +16,7 @@ export interface ICourse extends Document {
     level: ECourseLevel;
     views: number;
     rating: number[];
+    category: Schema.Types.ObjectId;
     info: {
         requirements: string[];
         benefits: string[];
@@ -66,6 +67,10 @@ const courseSchema = new Schema<ICourse> ({
         type: String,
         enum: Object.values(ECourseLevel),
         default: ECourseLevel.BEGINNER,
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
     },
     created_at: {
         type: Date,

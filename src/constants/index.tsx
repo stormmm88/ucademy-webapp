@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TMenuItem } from "@/types"
-import { IconPlay, AcademicCap, IconStudy, IconUsers, IconStack, IconCmt } from "../components/Icons"
+import { IconPlay, AcademicCap, IconStudy, IconUsers, IconStack, IconCmt, CategoryIcon } from "../components/Icons"
 import { ECourseLevel, ECourseStatus, EOrderStatus } from "@/types/enums"
 
 export const menuItem: (TMenuItem & { adminOnly?: boolean })[] = [
@@ -33,6 +33,11 @@ export const menuItem: (TMenuItem & { adminOnly?: boolean })[] = [
         url: "/manage/comments", 
         title: "Quản lý bình luận", 
         icon: <IconCmt className="size-5"/>    
+    },
+    {
+        url: "/manage/categories", 
+        title: "Quản lý danh mục", 
+        icon: <CategoryIcon className="size-5"/>    
     }
 ]
 

@@ -11,7 +11,7 @@ const page = async ({ searchParams }: {
     const params = await searchParams;
     const comments = await getAllComments({
         page: params.page || 1,
-        limit: 10,
+        limit: 5,
         search: params.search,
         status: params.status,
     });

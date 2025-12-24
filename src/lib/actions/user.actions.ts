@@ -13,7 +13,13 @@ import { revalidatePath } from "next/cache";
 export  async function createUser(params: TCreateUserParams) {
     try {
         connectToDatabase();
-        const newUser = await User.create(params);
+        const newUser = await User.create({
+            ...params,
+            courses: [],
+            role: "USER",
+            status: "ACTIVE",
+            created_at: new Date(),
+        });
         return newUser;
     } catch (error) {
         console.log(error)

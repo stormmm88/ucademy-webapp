@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { commonClassNames, courseStatus, orderStatus } from "@/constants";
+import { commonClassNames, orderStatus } from "@/constants";
 import Swal from 'sweetalert2'
 import {
   Select,
@@ -115,7 +115,7 @@ const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                {courseStatus.map((status) => (
+                                {orderStatus.map((status) => (
                                     <SelectItem value={status.value} key={status.value}>{status.title}</SelectItem>
                                 ))}
                             </SelectGroup>
@@ -123,7 +123,20 @@ const OrderManage = ({orders = []}: {orders: IOrderManageProps[]}) => {
                     </Select>
                 </div>
             </div>
-                
+
+            <div className="flex flex-col md:flex-row gap-5 mb-5">
+                <div className="mb-10 md:w-[300px] rounded-lg bg-gradient-to-br from-[#112d60] to-[#dd83e0] p-[2px]">
+                    <div className="flex items-center gap-1 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 px-3">
+                        Tổng đơn hàng:
+                        <strong>{orders.length}</strong>
+                    </div>  
+                </div>
+
+                <div className="flex items-center mb-10 border border-gray-300 dark:border-white/10 md:w-[300px] h-10 rounded-lg bg-gray-100 dark:bg-gray-800 p-2">
+                    Tổng số tiền: <strong className="ml-1">{orders.reduce((acc, order) => acc + order.total, 0).toLocaleString("vi-VN")}₫</strong>
+                </div>
+            </div>
+
             <Table>
                 <TableHeader>
                     <TableRow>

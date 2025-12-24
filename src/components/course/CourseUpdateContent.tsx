@@ -53,13 +53,13 @@ const CourseUpdateContent = ( {course}: {course: ICourseUpdateParams}) => {
         e.stopPropagation();
         try {
             Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Bạn có chắc chắn xóa chương này không?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Hủy",
             }).then( async (result) => {
                 if (result.isConfirmed) {
                     const res = await updateLectrue({
@@ -92,7 +92,7 @@ const CourseUpdateContent = ( {course}: {course: ICourseUpdateParams}) => {
               }
             })
             if(res?.success){
-              toast.success('Xóa chương thành công');
+              toast.success('Cập nhật chương thành công!');
               setLectureIdEdit('');
               setLectureEdit('');
             }
@@ -148,6 +148,36 @@ const CourseUpdateContent = ( {course}: {course: ICourseUpdateParams}) => {
       }
     }
 
+    // hàm xóa bài học
+    const handleDelLesson = async (e: MouseEvent<HTMLSpanElement>, lessonId: string) => {
+      e.stopPropagation();
+      try {
+        Swal.fire({
+                title: "Bạn có chắc chắn xóa bài học này không?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Hủy",
+            }).then( async (result) => {
+                if (result.isConfirmed) {
+                    const res = await updateLesson({
+                    lessonId,
+                    updateData: {
+                      _destroy: true,
+                    },
+                    path: `/manage/courses/update-content?slug=${course.slug}`
+                })
+                if(res?.success){
+                    toast.success('Xóa chương thành công')
+                }
+            }
+        });
+      } catch (error) {
+        console.log(error)
+      }
+    }
     return (
         <>
             <Button onClick={handleAddNewLecture} className="mb-2">Thêm chương mới</Button>
@@ -199,6 +229,7 @@ const CourseUpdateContent = ( {course}: {course: ICourseUpdateParams}) => {
                                         className={cn(commonClassNames.action, "text-blue-500")}
                                         onClick={(e) => {
                                               e.stopPropagation();
+                                              setLectureEdit(lecture.title);
                                               setLectureIdEdit(lecture._id);
                                         }}
                                       >
@@ -265,7 +296,7 @@ const CourseUpdateContent = ( {course}: {course: ICourseUpdateParams}) => {
                                             </span>
                                             <span 
                                                 className={cn(commonClassNames.action, "text-red-500")} 
-                                                // onClick={(e) => handleDelLesson(e, lesson._id)}
+                                                onClick={(e) => handleDelLesson(e, lesson._id)}
                                             >
                                                 <IconDel className="size-4"/>
                                             </span>
